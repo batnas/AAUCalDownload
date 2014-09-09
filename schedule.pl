@@ -1,16 +1,33 @@
 #!/usr/bin/perl
 
-use strict;
-use warnings;
+# vim: smartindent tabstop=4 shiftwidth=4 expandtab
 
 #
-#       ICal parser for computer science @ AAU
-#       v1.0        - Initial version
-#       v1.1+1.2    - Fix updating
-#       v1.3        - Add timezone
-#       v2.0        - Use new moodle, LWP::Simple -> LWP::UserAgent
-#       v3.0        - Accept parameters by CGI
-#       v3.1        - Accept multiple ignore parameters
+#   AAU Cal Downloader - Downloads AAU calendars and exports in iCal format
+#   Copyright (C) 2014 Jonas Christoffersen - jonasagcATgmailDOTTcom
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU Affero General Public License as
+#   published by the Free Software Foundation, either version 3 of the
+#   License, or (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU Affero General Public License for more details.
+#
+#   You should have received a copy of the GNU Affero General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+#
+#   iCal parser for computer science @ AAU
+#   v1.0        - Initial version
+#   v1.1+1.2    - Fix updating
+#   v1.3        - Add timezone
+#   v2.0        - Use new moodle, LWP::Simple -> LWP::UserAgent
+#   v3.0        - Accept parameters by CGI
+#   v3.1        - Accept multiple ignore parameters
 #
 
 #sources
@@ -19,6 +36,8 @@ use warnings;
 #http://stackoverflow.com/questions/18412533/perl-dataical-print-event-time-as-t000000z-instead-of-omitting-it
 #http://stackoverflow.com/questions/45453/icalendar-and-event-updates-not-working-in-outlook
 
+use strict;
+use warnings;
 
 #For parsing
 use XML::Simple;
@@ -29,7 +48,7 @@ use LWP::UserAgent;
 #For debug output
 use Data::Dumper;
 
-#For ICal support
+#For iCal support
 use Data::ICal;
 use Data::ICal::Entry::Event;
 use Date::ICal;
@@ -121,7 +140,7 @@ my $DOM = $parser->XMLin($ScheduleData);
 my @Classes = @{ $DOM->{'kursusgang'} };
 
 
-#build ICal
+#build iCal
 my $calendar = Data::ICal->new();
 $calendar->add_properties(
     method => "REQUEST",
